@@ -1,0 +1,20 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/ngrams-beam:$_IMAGE_VERSION', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/ngrams-beam:$_IMAGE_VERSION']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+        'dataflow',
+        'flex-template',
+        'build',
+        'gs://$_TEMPLATE_BUCKET/templates/$_TEMPLATE_VERSION/ngrams-beam.json',
+        '--image', 'gcr.io/$PROJECT_ID/ngrams-beam:$_IMAGE_VERSION',
+        '--sdk-language', 'PYTHON',
+        '--metadata-file', 'metadata.json'
+    ]
+images: ['gcr.io/$PROJECT_ID/ngrams-beam:$_IMAGE_VERSION']
+substitutions:
+  _IMAGE_VERSION: 1.0.0
+  _TEMPLATE_VERSION: 1.0.0
+  _TEMPLATE_BUCKET: gcp-pdp-words-dev-dataflow
