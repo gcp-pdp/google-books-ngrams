@@ -1,0 +1,11 @@
+{
+  "dataset_project_id": "gcp-pdp-words-dev",
+  "dataset_name": "words_dev",
+  "dataflow_template_path": "gs://gcp-pdp-words-dev-dataflow/templates",
+  "dataflow_environment": {
+    "numWorkers": 5,
+    "maxWorkers": 10,
+    "machineType": "n1-standard-2",
+    "flexrsGoal": "FLEXRS_COST_OPTIMIZED"
+  }
+}
