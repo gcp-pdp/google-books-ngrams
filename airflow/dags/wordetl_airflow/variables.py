@@ -20,6 +20,8 @@ def read_load_dag_vars(var_prefix="", **kwargs):
             "dataset_project_id", var_prefix, True, **kwargs
         ),
         "dataset_name": read_var("dataset_name", var_prefix, True, **kwargs),
+        "input_file": read_var("input_file", var_prefix, True, **kwargs),
+        "output_table": read_var("output_table", var_prefix, True, **kwargs),
         "notification_emails": read_var("notification_emails", None, False, **kwargs),
         "load_schedule_interval": read_var(
             "load_schedule_interval", var_prefix, False, **kwargs

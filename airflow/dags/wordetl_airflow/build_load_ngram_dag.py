@@ -3,10 +3,12 @@ from airflow import models, configuration
 from airflow.providers.google.cloud.operators.dataflow import (
     DataflowStartFlexTemplateOperator,
 )
+import logging
 
 
 def build_load_ngram_dag(
     dag_id,
+    n_gram,
     input_file,
     output_table,
     dataset_project_id,
@@ -48,8 +50,8 @@ def build_load_ngram_dag(
                 "containerSpecGcsPath": f"{dataflow_template_path}/ngrams-beam.json",
                 "jobName": 'ngram-beam-{{ execution_date.strftime("%Y%m%d-%H%M%S") }}',
                 "parameters": {
-                    "input-file": input_file,
-                    "output-table": f"{dataset_project_id}:{dataset_name}.{output_table}",
+                    "input-file": input_file.format(n=n_gram),
+                    "output-table": f"{dataset_project_id}:{dataset_name}.{output_table.format(n=n_gram)}",
                 },
                 "environment": dataflow_environment,
             }
