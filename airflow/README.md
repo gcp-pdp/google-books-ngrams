@@ -2,7 +2,11 @@
 
 Airflow DAGs for exporting and loading the ngrams data to Google BigQuery:
 
-- [load_ngram_dag.py](dags/load_dag.py) - loads ngram data from GCS buckets to BigQuery.
+- [load_ngram_dag.py](dags/load_ngram_dag.py) - loads google books ngrams from GCS buckets to BigQuery.
+
+## Architecture
+
+![ngrams_etl](ngrams_etl.svg)
 
 ## Prerequisites
 
