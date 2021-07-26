@@ -42,8 +42,7 @@ to configure email notifications.
 - Clone word etl Airflow: `git clone https://github.com/gcp-pdp/google-books-ngrams && cd google-books-ngrams/airflow`.
 - Copy `example_airflow_variables.json` to `airflow_variables.json`. 
   Edit `airflow_variables.json` and update configuration options with your values. 
-  You can find variables description in the table below. For the `output_bucket` variable 
-  specify the bucket created on step 1 above. You can get it by running `echo $BUCKET`.
+  You can find variables description in the table below.
 - Open Airflow UI. You can get its URL from `airflowUri` configuration option: 
   `gcloud composer environments describe ${ENVIRONMENT_NAME} --location us-central1`.
 - Navigate to **Admin > Variables** in the Airflow UI, click **Choose File**, select `airflow_variables.json`, 
@@ -69,9 +68,6 @@ to configure email notifications.
   `gcloud composer environments describe ${ENVIRONMENT_NAME} --location us-central1`.
 - Upload DAGs to the bucket. Make sure to replace `<dag_gcs_prefix>` with the value from the previous step:
   `./upload_dags.sh <dag_gcs_prefix>`.
-- To understand more about how the Airflow DAGs are structured 
-  read [this article](https://cloud.google.com/blog/products/data-analytics/ethereum-bigquery-how-we-built-dataset).
-- Note that it will take one or more days for `export_dag` to finish exporting the historical data.
 
 ## Troubleshooting
 
