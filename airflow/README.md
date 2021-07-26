@@ -1,4 +1,4 @@
-# Word ETL Airflow
+# Google Books Ngrams ETL Airflow
 
 Airflow DAGs for exporting and loading the ngrams data to Google BigQuery:
 
@@ -35,7 +35,7 @@ to configure email notifications.
    
 ## Configuring Airflow Variables
 
-- Clone word etl Airflow: `git clone https://github.com/gcp-pdp/geo-earthengine && cd geo-earthengine/airflow`.
+- Clone word etl Airflow: `git clone https://github.com/gcp-pdp/google-books-ngrams && cd google-books-ngrams/airflow`.
 - Copy `example_airflow_variables.json` to `airflow_variables.json`. 
   Edit `airflow_variables.json` and update configuration options with your values. 
   You can find variables description in the table below. For the `output_bucket` variable 
@@ -49,6 +49,9 @@ to configure email notifications.
 
 | Variable | Description |
 |---|---|
+| `input_datasets` | Comma-separated list of ngrams datasets, default: `eng` |
+| `input_file` | Gcs path to ngrams files, default: `gs://books/ngrams/books/20200217/{dataset}/{n}-*.gz` |
+| `output_table` | BigQuery table to write output to, default: `{dataset}_{n}` |
 | `dataset_project_id` | The project id where destination BigQuery dataset is |
 | `dataset_name` | The destination BigQuery dataset name |
 | `dataflow_template_path` | Gcs path prefix to Dataflow flex template |

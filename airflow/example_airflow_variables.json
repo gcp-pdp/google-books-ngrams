@@ -8,5 +8,7 @@
     "machineType": "n1-standard-2",
     "flexrsGoal": "FLEXRS_COST_OPTIMIZED"
   },
-  "input_datasets": "eng"
+  "input_datasets": "eng",
+  "eng_input_file": "gs://books/ngrams/books/20200217/eng/{n}-*.gz",
+  "eng_output_table": "eng_{n}"
 }
