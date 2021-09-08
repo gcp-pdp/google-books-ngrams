@@ -20,6 +20,11 @@
     "mode": "REPEATED"
   },
   {
+    "name": "has_tag",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  },
+  {
     "name": "years",
     "type": "RECORD",
     "mode": "REPEATED",
