@@ -16,7 +16,7 @@ pip install wheel annoy
 - Export the table to GCS in JSONL format
 - Copy the files to local disk
 - Add an 'id' column. Example output record: `{'id':1,'term':'foo','features':[0.1,0.5,-0.5,...]}`
-  - preserving the `id : term` mapping: `zcat eng_1.jsonl.gz | python3 ~/map.py > eng_1.map`
+  - preserving the `id : term` mapping: `zcat eng_1.jsonl.gz | python3 ./annoy-term2id.py > eng_1.map`
 
 ## Prep
 - build the annoy index: `zcat eng_1.jsonl.gz | python3 ./annoy-index.py eng_1.ann`
