@@ -1,0 +1,16 @@
+{
+  "name": "BERT Preprocessing flex template",
+  "description": "Dataflow flex template for preprocessing BERT",
+  "parameters": [
+    {
+      "name": "input-table",
+      "label": "BigQuery Input table.",
+      "helpText": "The BigQuery input table to read from."
+    },
+    {
+      "name": "output-table",
+      "label": "BigQuery output table.",
+      "helpText": "The BigQuery output table to write to."
+    }
+  ]
+}
