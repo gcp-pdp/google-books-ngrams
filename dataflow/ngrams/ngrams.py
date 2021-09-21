@@ -2,9 +2,16 @@ import argparse
 import json
 import logging
 import os
+import re
 
 import apache_beam as beam
-from apache_beam.options.pipeline_options import PipelineOptions
+from apache_beam.options.pipeline_options import PipelineOptions, SetupOptions
+
+
+def read_bigquery_schema_from_file(filepath):
+    with open(filepath) as file_handle:
+        content = file_handle.read()
+        return json.loads(content)
 
 
 def parse_v3(line):
@@ -33,10 +40,19 @@ def parse_v3(line):
     }
 
 
-def read_bigquery_schema_from_file(filepath):
-    with open(filepath) as file_handle:
-        content = file_handle.read()
-        return json.loads(content)
+def enrich_tag(element):
+    return {**element, "has_tag": has_tag(element["tokens"])}
+
+
+def has_tag(tokens):
+    for token in tokens:
+        if re.search(
+            "_(NOUN|VERB|ADJ|ADV|PRON|DET|ADP|NUM|CONJ|PRT|ROOT|START|END)$", token
+        ) is not None or re.search(
+            "^_(NOUN|VERB|ADJ|ADV|PRON|DET|ADP|NUM|CONJ|PRT|ROOT|START|END)_$", token
+        ):
+            return True
+    return False
 
 
 def run(argv=None):
@@ -53,9 +69,10 @@ def run(argv=None):
     args, beam_args = parser.parse_known_args()
 
     beam_options = PipelineOptions(beam_args)
+    beam_options.view_as(SetupOptions).save_main_session = True
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    schema_path = os.path.join(dir_path, "resources", "schema", "raw_ngram.json")
+    schema_path = os.path.join(dir_path, "ngram_schema.json")
     table_schema = {"fields": read_bigquery_schema_from_file(schema_path)}
 
     with beam.Pipeline(options=beam_options) as pipeline:
@@ -63,6 +80,7 @@ def run(argv=None):
             pipeline
             | "Read files" >> beam.io.ReadFromText(args.input_file)
             | "Map to BigQuery rows" >> beam.Map(parse_v3)
+            | "Enrich tag" >> beam.Map(enrich_tag)
             | "Write to BigQuery"
             >> beam.io.WriteToBigQuery(
                 args.output_table,

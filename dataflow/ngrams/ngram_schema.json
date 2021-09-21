@@ -22,7 +22,7 @@
   {
     "name": "has_tag",
     "type": "BOOLEAN",
-    "mode": "NULLABLE"
+    "mode": "REQUIRED"
   },
   {
     "name": "years",
