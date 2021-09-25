@@ -2,6 +2,7 @@ import argparse
 import json
 import logging
 import os
+import time
 
 import apache_beam as beam
 import tensorflow as tf
@@ -70,6 +71,8 @@ class Encode(beam.DoFn):
 
 
 def run(argv=None):
+    start_time = time.time()
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--input-table",
@@ -104,11 +107,12 @@ def run(argv=None):
             pipeline
             | "Read BigQuery"
             >> beam.io.ReadFromBigQuery(
-                query=f"SELECT DISTINCT preprocessed_term FROM `{args.input_table}`",
+                query=f"SELECT preprocessed_term FROM `{args.input_table}`",
                 use_standard_sql=True,
                 flatten_results=False,
             )
             | "Extract term" >> beam.Map(lambda element: element["preprocessed_term"])
+            | "Distinct" >> beam.Distinct()
             | "Batch elements"
             >> beam.BatchElements(
                 min_batch_size=args.batch_size, max_batch_size=args.batch_size
@@ -124,6 +128,9 @@ def run(argv=None):
                 create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
             )
         )
+
+    end_time = time.time()
+    print(end_time - start_time)
 
 
 if __name__ == "__main__":

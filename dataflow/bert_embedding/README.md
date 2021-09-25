@@ -25,8 +25,8 @@ NGRAM_DATASET="eng"
 python -m beam \
 --temp_location $TEMP_LOCATION \
 --project $PROJECT \
---input-table "$PROJECT.words_dev.${NGRAM_DATASET}_bert_preprocessed" \
---output-table "$PROJECT:words_dev.${NGRAM_DATASET}_bert_embeddings" \
+--input-table "${PROJECT}.sandbox.${NGRAM_DATASET}_bert_preprocessed" \
+--output-table "${PROJECT}:sandbox.${NGRAM_DATASET}_bert_embeddings" \
 --batch-size 1000
 ```
 
@@ -55,10 +55,9 @@ gcloud dataflow flex-template run "${NGRAM_DATASET}-bert-embeddings-`date +%Y%m%
     --template-file-gcs-location "$TEMPLATE_PATH" \
     --parameters input-table="$PROJECT.words_dev.${NGRAM_DATASET}_bert_preprocessed" \
     --parameters output-table="$PROJECT:words_dev.${NGRAM_DATASET}_bert_embeddings" \
-    --parameters batch-size=10000 \
+    --parameters batch-size=1000 \
     --num-workers 10 \
-    --max-workers 40 \
-    --worker-machine-type n2-standard2 \
-    --worker-zone us-central1-a \
+    --max-workers 30 \
+    --worker-machine-type c2-standard-8 \
     --region "$REGION"
 ```
