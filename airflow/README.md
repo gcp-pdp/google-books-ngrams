@@ -23,8 +23,8 @@ Airflow DAGs for exporting and loading the ngrams data to Google BigQuery:
     ENVIRONMENT_INDEX=0
     ENVIRONMENT_NAME=${PROJECT}-${ENVIRONMENT_INDEX} && echo "Environment name is ${ENVIRONMENT_NAME}"
     gcloud composer environments create ${ENVIRONMENT_NAME} --location=us-central1 --zone=us-central1-a \
-        --disk-size=30GB --machine-type=n1-standard-1 --node-count=3 --python-version=3 --image-version=composer-1.17.0-preview.5-airflow-2.0.1 \
-        --network=default --subnetwork=default    
+        --disk-size=30GB --machine-type=n1-standard-1 --node-count=3 --python-version=3 --image-version=composer-1.17.0-preview.10-airflow-2.1.1 \
+        --network=default --subnetwork=default
     ```
    
     Note that if Composer API is not enabled the command above will auto prompt to enable it.
@@ -53,8 +53,6 @@ to configure email notifications.
 | Variable | Description |
 |---|---|
 | `input_datasets` | Comma-separated list of ngrams datasets, default: `eng` |
-| `input_file` | Gcs path to ngrams files, default: `gs://books/ngrams/books/20200217/{dataset}/{n}-*.gz` |
-| `output_table` | BigQuery table to write output to, default: `{dataset}_{n}` |
 | `dataset_project_id` | The project id where destination BigQuery dataset is |
 | `dataset_name` | The destination BigQuery dataset name |
 | `dataflow_template_path` | Gcs path prefix to Dataflow flex template |
