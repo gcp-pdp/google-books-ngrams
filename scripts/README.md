@@ -19,7 +19,7 @@ pip install wheel annoy
   - preserving the `id : term` mapping: `zcat eng_1.jsonl.gz | python3 ./annoy-term2id.py > eng_1.map`
 
 ## Prep
-- build the annoy index: `zcat eng_1.jsonl.gz | python3 ./annoy-index.py eng_1.ann`
+- build the annoy index: `zcat eng_1.jsonl.gz | python3 ./annoy-build.py eng_1.ann`
   - This takes about 170GB of memory for 40M records and Annoy settings of 100 trees and Euclidean distance. Seems to scale linearly.
 - split the input (ID-space) based on number of CPU cores to be used:
   ```
