@@ -20,22 +20,13 @@ def read_load_dag_vars(var_prefix="", **kwargs):
             "dataset_project_id", var_prefix, True, **kwargs
         ),
         "dataset_name": read_var("dataset_name", var_prefix, True, **kwargs),
-        "input_file": read_var("input_file", var_prefix, True, **kwargs),
-        "output_table": read_var("output_table", var_prefix, True, **kwargs),
         "notification_emails": read_var("notification_emails", None, False, **kwargs),
-        "load_schedule_interval": read_var(
-            "load_schedule_interval", var_prefix, False, **kwargs
-        ),
         "load_max_active_runs": load_max_active_runs,
     }
 
     load_start_date = read_var("load_start_date", var_prefix, False, **kwargs)
     if load_start_date is not None:
         vars["load_start_date"] = datetime.strptime(load_start_date, "%Y-%m-%d")
-
-    load_end_date = read_var("load_end_date", var_prefix, False, **kwargs)
-    if load_end_date is not None:
-        vars["load_end_date"] = datetime.strptime(load_end_date, "%Y-%m-%d")
 
     return vars
 

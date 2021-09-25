@@ -1,14 +1,12 @@
 {
   "dataset_project_id": "gcp-pdp-words-dev",
   "dataset_name": "words_dev",
-  "dataflow_template_path": "gs://gcp-pdp-words-dev-dataflow/templates/1.0.0",
+  "dataflow_template_path": "gs://gcp-pdp-words-dev-dataflow/templates/1.0.1",
   "dataflow_environment": {
     "numWorkers": 5,
-    "maxWorkers": 20,
-    "machineType": "n1-standard-2",
+    "maxWorkers": 40,
+    "machineType": "n2-standard-4",
     "flexrsGoal": "FLEXRS_COST_OPTIMIZED"
   },
-  "input_datasets": "eng",
-  "eng_input_file": "gs://books/ngrams/books/20200217/eng/{n}-*.gz",
-  "eng_output_table": "eng_{n}"
+  "input_datasets": "eng,spa,eng-us,eng-gb,eng-fiction,chi_sim,fre,ger,heb,rus"
 }
