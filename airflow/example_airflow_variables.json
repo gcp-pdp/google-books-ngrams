@@ -1,12 +1,27 @@
 {
-  "dataset_project_id": "gcp-pdp-words-dev",
-  "dataset_name": "words_dev",
-  "dataflow_template_path": "gs://gcp-pdp-words-dev-dataflow/templates/1.0.1",
-  "dataflow_environment": {
-    "numWorkers": 5,
-    "maxWorkers": 40,
-    "machineType": "n2-standard-4",
-    "flexrsGoal": "FLEXRS_COST_OPTIMIZED"
+  "input_datasets": "eng,spa,eng-us,eng-gb,eng-fiction,chi_sim,fre,ger,heb,rus",
+  "ngram": {
+    "dataset_project_id": "gcp-pdp-words-dev",
+    "dataset_name": "words_dev",
+    "dataflow_template_path": "gs://gcp-pdp-words-dev-dataflow/templates/1.1.1",
+    "dataflow_environment": {
+      "numWorkers": 5,
+      "maxWorkers": 40,
+      "machineType": "n2-standard-4",
+      "flexrsGoal": "FLEXRS_COST_OPTIMIZED"
+    }
   },
-  "input_datasets": "eng,spa,eng-us,eng-gb,eng-fiction,chi_sim,fre,ger,heb,rus"
+  "bert_preprocessing": {
+    "input_dataset_project_id": "gcp-pdp-words-dev",
+    "input_dataset_name": "words_dev",
+    "output_dataset_project_id": "gcp-pdp-words-dev",
+    "output_dataset_name": "words_dev",
+    "dataflow_template_path": "gs://gcp-pdp-words-dev-dataflow/templates/bert-preprocessing-1.0.0.json",
+    "dataflow_environment": {
+      "numWorkers": 10,
+      "maxWorkers": 40,
+      "machineType": "n2-standard-4",
+      "flexrsGoal": "FLEXRS_COST_OPTIMIZED"
+    }
+  }
 }
