@@ -3,7 +3,7 @@
   "ngram": {
     "dataset_project_id": "gcp-pdp-words-dev",
     "dataset_name": "words_dev",
-    "dataflow_template_path": "gs://gcp-pdp-words-dev-dataflow/templates/1.1.1",
+    "dataflow_template_path": "gs://gcp-pdp-words-dev-dataflow/templates/ngrams-1.1.1.json",
     "dataflow_environment": {
       "numWorkers": 5,
       "maxWorkers": 40,

@@ -21,13 +21,13 @@ python -m ngrams --input-file $GCS_PATH \
 
 Build docker image
 ```bash
-TEMPLATE_IMAGE="gcr.io/$PROJECT/ngrams-beam:latest"
+TEMPLATE_IMAGE="gcr.io/$PROJECT/ngrams-beam:1.1.1"
 gcloud builds submit --tag $TEMPLATE_IMAGE .
 ```
    
 Create Dataflow flex template
 ```bash
-TEMPLATE_PATH="gs://$BUCKET/templates/ngrams-beam.json"
+TEMPLATE_PATH="gs://$BUCKET/templates/ngrams-1.1.1.json"
 gcloud dataflow flex-template build $TEMPLATE_PATH \
  --image "$TEMPLATE_IMAGE" \
  --sdk-language "PYTHON" \

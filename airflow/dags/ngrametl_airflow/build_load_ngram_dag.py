@@ -51,7 +51,7 @@ def build_load_ngram_dag(
         task_id="load_ngram",
         body={
             "launchParameter": {
-                "containerSpecGcsPath": f"{dataflow_template_path}/ngrams-beam.json",
+                "containerSpecGcsPath": dataflow_template_path,
                 "jobName": "load-{dataset}-{ngram}".format(
                     dataset=dataset.replace("_", "-"), ngram=ngram
                 )
