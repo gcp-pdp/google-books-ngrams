@@ -32,6 +32,24 @@ def read_bert_preprocessing_dag_vars(**kwargs):
     }
 
 
+def read_bert_embeddings_dag_vars(**kwargs):
+    """Read Airflow variables for BERT embeddings DAG"""
+    var = read_var("bert_embeddings", required=True, deserialize_json=True)
+    return {
+        "input_dataset_project_id": get_str(var, "input_dataset_project_id", **kwargs),
+        "input_dataset_name": get_str(var, "input_dataset_name", **kwargs),
+        "output_dataset_project_id": get_str(
+            var, "output_dataset_project_id", **kwargs
+        ),
+        "output_dataset_name": get_str(var, "output_dataset_name", **kwargs),
+        "dataflow_template_path": get_str(var, "dataflow_template_path", **kwargs),
+        "dataflow_environment": get_str(var, "dataflow_environment", **kwargs),
+        "notification_emails": get_str(var, "notification_emails", **kwargs),
+        "load_max_active_runs": get_int(var, "load_max_active_runs", **kwargs),
+        "batch_size": get_int(var, "batch_size", **kwargs),
+    }
+
+
 def read_var(
     var_name, var_prefix=None, required=False, deserialize_json=False, **kwargs
 ):
