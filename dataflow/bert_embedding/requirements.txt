@@ -1,0 +1,4 @@
+apache-beam[gcp]==2.31.0
+tensorflow-hub
+tensorflow-text
+bert-for-tf2

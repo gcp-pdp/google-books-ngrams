@@ -1,0 +1,21 @@
+{
+  "name": "BERT embeddings flex template",
+  "description": "Dataflow flex template for processing BERT embeddings",
+  "parameters": [
+    {
+      "name": "input-table",
+      "label": "BigQuery BERT preprocessed input table.",
+      "helpText": "The BigQuery input table to read from."
+    },
+    {
+      "name": "output-table",
+      "label": "BigQuery BERT embeddings output table.",
+      "helpText": "The BigQuery output table to write to."
+    },
+    {
+      "name": "batch-size",
+      "label": "Batch size.",
+      "helpText": "Batch size to process BERT model."
+    }
+  ]
+}

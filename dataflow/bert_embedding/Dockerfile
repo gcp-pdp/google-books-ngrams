@@ -10,10 +10,12 @@ WORKDIR ${WORKDIR}
 RUN apt-get update && apt-get install -y libffi-dev && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-COPY resources/ ./resources/
-COPY ngrams.py .
-
-ENV FLEX_TEMPLATE_PYTHON_REQUIREMENTS_FILE="${WORKDIR}/requirements.txt"
-ENV FLEX_TEMPLATE_PYTHON_PY_FILE="${WORKDIR}/ngrams.py"
 
 RUN pip install -U -r ./requirements.txt
+
+COPY schema.json .
+COPY beam.py .
+COPY setup.py .
+
+ENV FLEX_TEMPLATE_PYTHON_SETUP_FILE="${WORKDIR}/setup.py"
+ENV FLEX_TEMPLATE_PYTHON_PY_FILE="${WORKDIR}/beam.py"

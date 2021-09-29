@@ -1,10 +1,10 @@
 from __future__ import print_function
 
 from ngrametl_airflow.build_load_ngram_dag import build_load_ngram_dag
-from ngrametl_airflow.variables import read_load_dag_vars, read_var
+from ngrametl_airflow.variables import read_var, read_load_ngram_dag_vars
 
 datasets = read_var("input_datasets", required=True, input_datasets="")
-load_vars = read_load_dag_vars(
+load_vars = read_load_ngram_dag_vars(
     load_max_active_runs=1,
 )
 for dataset in datasets.split(","):

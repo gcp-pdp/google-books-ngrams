@@ -1,0 +1,17 @@
+[
+  {
+    "name": "term",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "preprocessed_term",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "token_count",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  }
+]
